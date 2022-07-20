@@ -7,4 +7,4 @@ def MyfirstView(request):
     date = {
         'nombre': 'Joel German'
     }
-    return JsonResponse(date)
+    return render(request, 'index.html', date)
