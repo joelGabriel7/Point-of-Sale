@@ -26,3 +26,6 @@ from core.erp.models import Type
 
 x= Type.objects.filter(name__startswith='m')
 print(x)
+
+i = Type.objects.filter(name__startswith='P')
+print(i)
