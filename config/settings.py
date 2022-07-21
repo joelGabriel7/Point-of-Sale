@@ -110,7 +110,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "static"
 STATICFILES_DIRS=[
-  'static/lib/bootstrap-4.4.1-dist'
+  'static/lib/bootstrap-4.4.1-dist',
+
 ]
 
 # Default primary key field type
