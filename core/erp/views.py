@@ -12,7 +12,7 @@ def MyfirstView(request):
         'categoria': Category.objects.all()
 
     }
-    return render(request, 'index.html', date)
+    return render(request, 'body.html', date)
 
 def MySecondView(request):
 
