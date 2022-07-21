@@ -1,25 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Saludando</title>
+  <title>Bootstrap Example</title>
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+<script src="{% static 'js/bootstrap.bundle.min.js' %}" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+<script src="{% static 'js/jquery-3.4.1.slim.min.js' %}" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
 </head>
 <body>
-<h1>Primera Page Web</h1>
 
-{% block content %}
-    <ul>
-        {% for category in categoria %}
-            <li> {{ category }}   </li>
-
-
-
-        {% endfor %}
-
-    </ul>
-
-{% endblock %}
-
-
+<div class="container">
+  <h1>My First Bootstrap Page</h1>
+  <p>This part is inside a .container class.</p>
+  <p>The .container class provides a responsive fixed width container.</p>
+</div>
+<button type="button" class="btn btn-primary">Primary</button>
+<button type="button" class="btn btn-secondary">Secondary</button>
+<button type="button" class="btn btn-success">Success</button>
+<button type="button" class="btn btn-danger">Danger</button>
+<button type="button" class="btn btn-warning">Warning</button>
+<button type="button" class="btn btn-info">Info</button>
+<button type="button" class="btn btn-light">Light</button>
+<button type="button" class="btn btn-dark">Dark</button>
+<button type="button" class="btn btn-link" style="text-decoration: none">Link</button>
 </body>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
 </html>
