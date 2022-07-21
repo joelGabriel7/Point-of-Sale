@@ -3,6 +3,8 @@
 {% block content %}
     {% if productos %}
     {% for producto in productos %}
+
+        <strong>Productos</strong>
     <ul>
         <li>Nombre: {{ producto.name }} / {{ producto.category.name }}</li>
 {#        <li>{{ producto.category.name }}</li>#}
