@@ -5,6 +5,21 @@
     <title>Saludando</title>
 </head>
 <body>
-<h1> Hola me llamo {{ nombre }}</h1>
+<h1>Primera Page Web</h1>
+
+{% block content %}
+    <ul>
+        {% for category in categoria %}
+            <li> {{ category }}   </li>
+
+
+
+        {% endfor %}
+
+    </ul>
+
+{% endblock %}
+
+
 </body>
 </html>

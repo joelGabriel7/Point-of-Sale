@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    {% if productos %}
+    {% for producto in productos %}
+    <ul>
+        <li>Nombre: {{ producto.name }} / {{ producto.category.name }}</li>
+{#        <li>{{ producto.category.name }}</li>#}
+    </ul>
+{% endfor %}
+    {% endif %}
+
+{% endblock %}
+
