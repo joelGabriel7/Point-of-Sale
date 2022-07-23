@@ -9,12 +9,12 @@
 {% endblock %}
 
 {% block rows %}
-    {% for c in categories %}
+    {% for c in object_list%}
         <tr>
             <td>{{ c.id }}</td>
             <td>{{ c.name }}</td>
             <td>
-                <button type="button" class="btn btn-warning btn-xs btn-flat">
+                <button type="button" class="btn btn-success btn-xs btn-flat">
                     <i class="fas fa-edit"></i>
                 </button>
                 <button type="button" class="btn btn-danger btn-xs btn-flat">
