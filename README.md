@@ -1,2 +1,2 @@
-# CURSO-DJANGO-YOUTUBE
+# CURSO-DJANGO
 Curso de Django basico en youtube
