@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #lib
+    'widget_tweaks',
+    #App
     'core.erp',
 ]
 MIDDLEWARE = [

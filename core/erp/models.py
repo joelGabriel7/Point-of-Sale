@@ -1,13 +1,16 @@
 import datetime
 
+from django.db import models
 from django.forms import model_to_dict
 
 from core.erp.choices import gender_choices
-from django.db import models
+
+
 # Create your models here.
 
 class Category(models.Model):
     name = models.CharField(max_length=50, verbose_name='Nombre')
+    desc = models.CharField(max_length=500, null=True, blank=True, verbose_name='Descripcion')
 
     def __str__(self):
         return f'Nombre:{self.name}'
@@ -36,6 +39,7 @@ class Product(models.Model):
         verbose_name_plural = 'Productos'
         ordering = ['id']
 
+
 class Client(models.Model):
     names = models.CharField(max_length=150, verbose_name='Nombres')
     surnames = models.CharField(max_length=150, verbose_name='Apellidos')
@@ -52,6 +56,7 @@ class Client(models.Model):
         verbose_name_plural = 'Clientes'
         ordering = ['id']
 
+
 class Sale(models.Model):
     cli = models.ForeignKey(Client, on_delete=models.CASCADE)
     date_joined = models.DateField(default=datetime.datetime.now)
@@ -66,6 +71,7 @@ class Sale(models.Model):
         verbose_name = 'Venta'
         verbose_name_plural = 'Ventas'
         ordering = ['id']
+
 
 class DetSale(models.Model):
     sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
