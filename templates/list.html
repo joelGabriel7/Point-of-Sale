@@ -18,7 +18,7 @@
             </h3>
         </div>
         <div class="card-body">
-            <table class="table" id="data">
+            <table class="table" id="date">
                 <thead>
                 {% block columns %}
 
@@ -41,9 +41,12 @@
     {% block JavaScript %}
         <script type="application/javascript">
             $(function () {
-                $('#data').DataTable({
+                $('#date').DataTable({
                     responsive: true,
                     autoWidth: false,
+                    stateSave: true,
+                    "bDestroy": true
+
 
                 });
 
@@ -59,7 +62,7 @@
                         alert(textStatus+':'+errorThrown);
                     }).always(function (data) {
                     })
-                    
+
                 });
             });
         </script>

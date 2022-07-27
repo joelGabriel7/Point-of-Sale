@@ -9,7 +9,7 @@ from core.erp.choices import gender_choices
 # Create your models here.
 
 class Category(models.Model):
-    name = models.CharField(max_length=50, verbose_name='Nombre')
+    name = models.CharField(max_length=50, verbose_name='Nombre', unique=True)
     desc = models.CharField(max_length=500, null=True, blank=True, verbose_name='Descripcion')
 
     def __str__(self):

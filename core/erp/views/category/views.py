@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -40,6 +40,8 @@ class CategoryListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(CategoryListView, self).get_context_data()
         context['title'] = 'Listado de Categorías'
+        context['entity'] = 'Categoria'
+        context['list_url'] = reverse_lazy('category_list')
         return context
 
 
@@ -47,10 +49,24 @@ class CategoryCreateView(CreateView):
     model = Category
     form_class = CategoryForms
     template_name = 'category/create.html'
-    success_url =reverse_lazy('category_list')
+    success_url = reverse_lazy('category_list')
+
+    # def post(self, request, *args, **kwargs):
+    #     print(request.POST)
+    #     form = CategoryForms(request.POST)
+    #     if form.is_valid():
+    #         form.save()
+    #         HttpResponseRedirect(self.success_url)
+    #
+    #     context = self.get_context_data(**kwargs)
+    #     context['form'] = form
+    #     self.object = None
+    #     return render(request, self.template_name, context)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['title'] = 'Agregar Nueva Categoria'
+        context['entity'] = 'Categoria'
+        context['list_url'] = reverse_lazy('category_list')
         # print(reverse_lazy('category_list'))
         return context

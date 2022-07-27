@@ -1,0 +1,46 @@
+{% extends 'body.html' %}
+
+{% block content %}
+    <form method="post" action=".">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-plus"></i>
+                    {{ title }}
+                </h3>
+            </div>
+            <div class="card-body">
+                {% csrf_token %}
+                {% for field in form.visible_fields %}
+                    <div class="form-group">
+                        <label for="name">{{ field.label }}:</label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+
+
+            </div>
+            <div class="card-footer">
+                <a type="submit" class="btn btn-primary btnTest" href="{% url 'category_list' %}">
+                    <i class="fas fa-save"></i> Guardar Categoria
+                </a>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        {% if form.errors %}
+            let errors = '';
+            {% for field in form %}
+                {% for error in field.errors %}
+                    errors+='{{ error }}';
+                {% endfor %}
+            {% endfor %}
+            Swal.fire({
+                title: 'Error!',
+                text: errors,
+                icon: 'error',
+            });
+        {% endif %}
+    </script>
+{% endblock %}
