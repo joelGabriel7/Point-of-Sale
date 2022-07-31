@@ -11,6 +11,7 @@
             </div>
             <div class="card-body">
                 {% csrf_token %}
+                <input type="hidden" name="action" value="{{ action }}">
                 {% for field in form.visible_fields %}
                     <div class="form-group">
                         <label for="name">{{ field.label }}:</label>
@@ -21,7 +22,7 @@
 
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary btnTest" >
+                <button type="submit" class="btn btn-primary btnTest">
                     <i class="fas fa-save"></i> Guardar Categoria
                 </button>
             </div>
@@ -31,8 +32,8 @@
         {% if form.errors %}
             let errors = '';
             {% for field in form %}
-                {% for error in field.errors %}
-                    errors+='{{ error }}';
+                {% for errors in field.errors %}
+                    errors += '{{ errors }}';
                 {% endfor %}
             {% endfor %}
             Swal.fire({
@@ -41,5 +42,31 @@
                 icon: 'error',
             });
         {% endif %}
+
+
+        $('form').on('submit', function (e) {
+            e.preventDefault();
+            let parameters = $(this).serializeArray();
+
+            $.ajax({
+                url: '{% url "category_add"%}',
+                type: 'POST',
+                data: parameters,
+                dataType: 'json'
+            }).done(function (data) {
+                {#alert('guardado');#}
+                if (!data.hasOwnProperty('error')) {
+                    location.href = '{{ list_url }}';
+                    return false;
+
+                }
+                message_error(data.error);
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                alert(textStatus + ':' + errorThrown);
+            }).always(function (data) {
+            });
+        });
+
+
     </script>
 {% endblock %}
