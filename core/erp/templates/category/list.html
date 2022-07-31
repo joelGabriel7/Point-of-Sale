@@ -17,9 +17,9 @@
                 <a href="{% url 'category_edit' c.id %}" class="btn btn-success btn-xs btn-flat">
                     <i class="fas fa-edit"></i>
                 </a>
-                <button type="button" class="btn btn-danger btn-xs btn-flat">
+                <a href="{% url "category_delete" c.id %}" class="btn btn-danger btn-xs btn-flat">
                     <i class="fas fa-trash-alt"></i>
-                </button>
+                </a>
             </td>
         </tr>
     {% endfor %}

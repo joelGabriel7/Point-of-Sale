@@ -75,7 +75,7 @@ class CategoryCreateView(CreateView):
     #     return render(request, self.template_name, context)
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data()
+        context = super().get_context_data( **kwargs)
         context['title'] = 'Agregar Nueva Categoria'
         context['entity'] = 'Categoria'
         context['list_url'] = reverse_lazy('category_list')
@@ -89,7 +89,7 @@ class CategoryUpdateView(UpdateView):
     form_class = CategoryForms
     template_name = 'category/create.html'
     success_url = reverse_lazy('category_list')
-    
+
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super().dispatch(request, *args, **kwargs)
@@ -110,10 +110,23 @@ class CategoryUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         # print(self.object)
         # print(self.get_object())
-        context = super().get_context_data()
+        context = super().get_context_data( **kwargs)
         context['title'] = 'Editar una Categoria'
         context['entity'] = 'Categoria'
         context['list_url'] = reverse_lazy('category_list')
         context['action'] = 'edit'
         # print(reverse_lazy('category_list'))
+        return context
+
+
+class CategoryDeleteView(DeleteView):
+    model = Category
+    template_name = 'category/delete.html'
+    success_url = reverse_lazy('category_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Eliminación de una Categoria'
+        context['entity'] = 'Categorias'
+        context['list_url'] = reverse_lazy('category_list')
         return context
