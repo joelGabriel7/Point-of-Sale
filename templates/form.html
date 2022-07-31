@@ -49,12 +49,13 @@
             let parameters = $(this).serializeArray();
 
             $.ajax({
-                url: '{% url "category_add"%}',
+                url: window.location.pathname,
                 type: 'POST',
                 data: parameters,
                 dataType: 'json'
             }).done(function (data) {
                 {#alert('guardado');#}
+                console.log(data)
                 if (!data.hasOwnProperty('error')) {
                     location.href = '{{ list_url }}';
                     return false;

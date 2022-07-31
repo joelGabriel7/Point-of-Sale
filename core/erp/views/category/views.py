@@ -58,7 +58,7 @@ class CategoryCreateView(CreateView):
                 form = self.get_form()
                 data = form.save()
             else:
-                data['error']='No se ha funcionado'
+                data['error'] = 'No se ha funcionado'
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data)
@@ -80,5 +80,40 @@ class CategoryCreateView(CreateView):
         context['entity'] = 'Categoria'
         context['list_url'] = reverse_lazy('category_list')
         context['action'] = 'add'
+        # print(reverse_lazy('category_list'))
+        return context
+
+
+class CategoryUpdateView(UpdateView):
+    model = Category
+    form_class = CategoryForms
+    template_name = 'category/create.html'
+    success_url = reverse_lazy('category_list')
+    
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+        try:
+            action = request.POST['action']
+            if action == 'edit':
+                form = self.get_form()
+                data = form.save()
+            else:
+                data['error'] = 'No se ha funcionado'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data)
+
+    def get_context_data(self, **kwargs):
+        # print(self.object)
+        # print(self.get_object())
+        context = super().get_context_data()
+        context['title'] = 'Editar una Categoria'
+        context['entity'] = 'Categoria'
+        context['list_url'] = reverse_lazy('category_list')
+        context['action'] = 'edit'
         # print(reverse_lazy('category_list'))
         return context
