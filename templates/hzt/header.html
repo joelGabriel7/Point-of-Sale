@@ -1,9 +1,9 @@
 {% load static %}
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+<nav class="main-header navbar navbar-expand navbar-dark navbar-primary">
     <div class="container">
         <a href="#" class="navbar-brand">
-            <img src="{% static 'Admin-c/img/AdminLTELogo.png' %}" alt="AdminLTE Logo"
+            <img src="{% static 'img/cart-plus-solid.svg' %}" alt="POS 1.0 logo"
                  class="brand-image"
                  style="opacity: .8">
             <span class="brand-text font-weight-light">POS 1.0</span>
@@ -21,7 +21,7 @@
                     <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                        class="nav-link dropdown-toggle"><i class="fas fa-folder-open"></i> Mantenimientos</a>
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                        <li><a href="#" class="dropdown-item"><i class="fas fa-truck-loading"></i> Categorías</a></li>
+                        <li><a href="{% url 'category_list' %}" class="dropdown-item"><i class="fas fa-truck-loading"></i> Categorías</a></li>
                         <li><a href="#" class="dropdown-item"><i class="fas fa-boxes"></i> Productos</a></li>
                         <li><a href="#" class="dropdown-item"><i class="fas fa-users"></i> Clientes</a></li>
                         <li><a href="#" class="dropdown-item"><i class="fas fa-shopping-cart"></i> Ventas</a></li>
@@ -32,29 +32,32 @@
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="far fa-bell"></i>
-                    <span class="badge badge-warning navbar-badge">15</span>
+                    <i class="fas fa-users-cog"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <span class="dropdown-header">15 Notifications</span>
+                    <span class="dropdown-header">
+                        Último Acceso: 12 de Abril de 2020
+                    </span>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item">
-                        <i class="fas fa-envelope mr-2"></i> 4 new messages
+                        <i class="fas fa-edit mr-2"></i> Editar perfil
                         <span class="float-right text-muted text-sm">3 mins</span>
                     </a>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item">
-                        <i class="fas fa-users mr-2"></i> 8 friend requests
+                        <i class="fas fa-lock mr-2"></i> Editar password
                         <span class="float-right text-muted text-sm">12 hours</span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-file mr-2"></i> 3 new reports
-                        <span class="float-right text-muted text-sm">2 days</span>
+                    <a href="#" class="dropdown-item dropdown-footer">
+                        <p>Este sistema te permitira realizar diferentes actividades</p>
                     </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                 </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-power-off" aria-hidden="true"></i>
+                </a>
             </li>
         </ul>
     </div>
