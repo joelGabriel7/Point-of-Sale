@@ -28,10 +28,16 @@ class CategoryListView(ListView):
     def post(self, request, *args, **kwargs):
         data = {}
         try:
-            data = Category.objects.get(pk=request.POST['id']).toJson()
+            action = request.POST['action']
+            if action == 'searchdata':
+                data = []
+                for i in Category.objects.all():
+                    data.append(i.toJson())
+            else:
+                data['error'] = 'Ha ocurrido un error'
         except Exception as e:
             data['error'] = str(e)
-        return JsonResponse(data)
+        return JsonResponse(data, safe=False)
 
     def get_queryset(self):
         return Category.objects.all()
@@ -75,7 +81,7 @@ class CategoryCreateView(CreateView):
     #     return render(request, self.template_name, context)
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data( **kwargs)
+        context = super().get_context_data(**kwargs)
         context['title'] = 'Agregar Nueva Categoria'
         context['entity'] = 'Categoria'
         context['list_url'] = reverse_lazy('category_list')
@@ -110,7 +116,7 @@ class CategoryUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         # print(self.object)
         # print(self.get_object())
-        context = super().get_context_data( **kwargs)
+        context = super().get_context_data(**kwargs)
         context['title'] = 'Editar una Categoria'
         context['entity'] = 'Categoria'
         context['list_url'] = reverse_lazy('category_list')
@@ -124,9 +130,21 @@ class CategoryDeleteView(DeleteView):
     template_name = 'category/delete.html'
     success_url = reverse_lazy('category_list')
 
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+        try:
+            self.object.delete()
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Eliminación de una Categoria'
+        context['title'] = 'Eliminar una Categoria'
         context['entity'] = 'Categorias'
         context['list_url'] = reverse_lazy('category_list')
         return context
