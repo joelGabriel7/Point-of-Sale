@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     #App
     'core.erp',
+    'core.homepage',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -115,6 +116,13 @@ STATIC_ROOT = BASE_DIR / "static"
 STATICFILES_DIRS=[
   'static/lib/bootstrap-4.4.1-dist',
 
+]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+# ]
+STATICFILES_FINDERS =[
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
 # Default primary key field type
