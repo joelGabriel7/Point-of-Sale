@@ -16,10 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from core.homepage.views import  *
+from core.login.views import  *
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('erp/', include('core.erp.urls')),
-    path('', IndexView.as_view()),
+    # path('', IndexView.as_view()),
+    path('', LoginFormView.as_view()),
 
 ]

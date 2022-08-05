@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% load static %}
+{% load widget_tweaks %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'Admin-c/plugins/fontawesome-free/css/all.min.css' %}">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="{% static 'Admin-c/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'Admin-c/css/adminlte.min.css' %}">
+    <script src="{% static 'sweetalert2-9.10.0/sweetalert2.all.min.js' %}"></script>
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="login-logo">
+        <a href="#"><b>{{ title }}</b></a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+        <div class="card-body login-card-body">
+            <p class="login-box-msg">
+
+                 <span  class="fas fa-user-lock"></span>
+
+            </p>
+
+
+            <form action="." method="post">
+                {% csrf_token %}
+                <div class="input-group mb-3">
+                    {{ form.username|add_class:'form-control'| attr:'autocomplete:off'| attr:'placeholder: Ingrese su username'|attr:'autofocus: off' }}
+                    {#          {{ form.username|attr:'autocomplete:off'}}#}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    {{ form.password|add_class:'form-control'| attr:'autocomplete:off'| attr:'placeholder: Ingrese su password' }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <script type="application/javascript">
+                {% if form.errors %}
+                    let errors = '';
+                    {% for field in form %}
+                        {% for errors in field.errors %}
+                            errors += '{{ errors }}';
+                        {% endfor %}
+                    {% endfor %}
+                    {% for errors in form.non_field_errors %}
+                        errors += '{{ errors }}';
+                    {% endfor %}
+
+                    Swal.fire({
+                        title: 'Error!',
+                        text: errors,
+                        icon: 'error',
+                    });
+                {% endif %}
+            </script>
+
+            <!-- /.login-box -->
+
+            <!-- jQuery -->
+            <script src="{% static 'Admin-c/plugins/jquery/jquery.min.js' %}"></script>
+            <!-- Bootstrap 4 -->
+            <script src="{% static 'Admin-c/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+            <!-- AdminLTE App -->
+            <script src="{% static 'Admin-c/js/adminlte.min.js' %}"></script>
+</body>
+</html>

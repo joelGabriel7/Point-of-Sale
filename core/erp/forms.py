@@ -30,7 +30,8 @@ class CategoryForms(ModelForm):
                     'rows': 3,
                     'cols': 3
                 }
-            )
+            ),
+
         }
 
     def save(self, commit=True):
