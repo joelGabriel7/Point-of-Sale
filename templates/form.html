@@ -17,6 +17,7 @@
             </div>
             <div class="card-body">
                 {% csrf_token %}
+                        {{ form.non_field_errors }}
                 <input type="hidden" name="action" value="{{ action }}">
                 {% for field in form.visible_fields %}
                     <div class="form-group">
@@ -42,6 +43,10 @@
                     errors += '{{ errors }}';
                 {% endfor %}
             {% endfor %}
+            {% for errors in form.non_field_errors %}
+                errors += '{{ errors }}';
+            {% endfor %}
+
             Swal.fire({
                 title: 'Error!',
                 text: errors,
@@ -50,7 +55,7 @@
         {% endif %}
 
 
-        $('form').on('submit', function (e) {
+      /*  $('form').on('submit', function (e) {
             e.preventDefault();
             let parameters = $(this).serializeArray();
 
@@ -72,7 +77,7 @@
                 alert(textStatus + ':' + errorThrown);
             }).always(function (data) {
             });
-        });
+        });*/
 
 
     </script>

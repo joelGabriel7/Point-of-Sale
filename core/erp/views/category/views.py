@@ -138,3 +138,30 @@ class CategoryDeleteView(DeleteView):
         context['entity'] = 'Categorias'
         context['list_url'] = reverse_lazy('category_list')
         return context
+
+
+class CategoryFormView(FormView):
+    form_class = CategoryForms
+    template_name = 'category/create.html'
+    success_url = reverse_lazy('category_list')
+    
+    
+    def form_valid(self, form):
+        print(form.is_valid())
+        print(form)
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        print(form.is_valid())
+        print(form.errors)
+        return super().form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Form | Categoria'
+        context['entity'] = 'Categoria'
+        context['list_url'] = reverse_lazy('category_list')
+        context['action'] = 'add'
+        # print(reverse_lazy('category_list'))
+        return context
+
