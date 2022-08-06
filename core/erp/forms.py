@@ -49,10 +49,10 @@ class CategoryForms(ModelForm):
         return data
 
 
-    def clean(self):
-        cleaned = super().clean()
-        if len(cleaned['name']) <= 50:
-            raise forms.ValidationError('Validacion error')
-            # self.add_error('name', 'Error en guardar categoria')
-        print(cleaned)
-        return cleaned
+    # def clean(self):
+    #     cleaned = super().clean()
+    #     if len(cleaned['name']) <= 50:
+    #         raise forms.ValidationError('Validacion error')
+    #         # self.add_error('name', 'Error en guardar categoria')
+    #     print(cleaned)
+    #     return cleaned

@@ -120,6 +120,8 @@ STATICFILES_DIRS=[
 ]
 
 LOGIN_REDIRECT_URL = '/erp/category/list'
+LOGOUT_REDIRECT_URL = '/login/'
+
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, "static"),
 # ]
