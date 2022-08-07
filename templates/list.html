@@ -37,10 +37,10 @@
             </table>
         </div>
         <div class="card-footer">
-            <a class="btn btn-primary btnTest"  href="{% url 'category_add' %}">
+            <a class="btn btn-primary btnTest"  href="{{ create_url }}">
                 <i class="fas fa-plus" ></i> Nuevo Registro
             </a>
-            <a class="btn btn-success "  href="{% url 'category_list' %}">
+            <a class="btn btn-success "  href="{{list_url }}">
                <i class="fas fa-sync"></i> Actualizar
             </a>
         </div>

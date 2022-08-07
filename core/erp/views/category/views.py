@@ -39,6 +39,8 @@ class CategoryListView(ListView):
         context['title'] = 'Listado de Categorías'
         context['entity'] = 'Categoria'
         context['list_url'] = reverse_lazy('category_list')
+        context['create_url'] = reverse_lazy('category_add')
+
         return context
 
 
