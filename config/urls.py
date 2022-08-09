@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from core.homepage.views import  *
 from core.login.views import  *
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -24,6 +26,7 @@ urlpatterns = [
     path('erp/', include('core.erp.urls')),
     path('', IndexView.as_view(), name='main'),
     path('login/', include('core.login.urls'))
-
-
 ]
+
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -59,13 +59,17 @@
 
       $('form').on('submit', function (e) {
             e.preventDefault();
-            let parameters = $(this).serializeArray();
+            {#let parameters = $(this).serializeArray();#}
+          let parameters = new FormData(this);
+
 
             $.ajax({
                 url: window.location.pathname,
                 type: 'POST',
                 data: parameters,
-                dataType: 'json'
+                dataType: 'json',
+                processData: false,
+                contentType: false,
             }).done(function (data) {
                 {#alert('guardado');#}
                 console.log(data)
@@ -79,7 +83,9 @@
                 alert(textStatus + ':' + errorThrown);
             }).always(function (data) {
             });
-        });
+
+      });
+
 
 
     </script>

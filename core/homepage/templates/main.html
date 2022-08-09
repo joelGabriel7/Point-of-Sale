@@ -57,11 +57,11 @@
 
         <nav class="nav-menu">
             <ul>
-                <li class="active"><a href="index.html"><i class="bx bx-home"></i> <span>Home</span></a></li>
+                <li class="active"><a href="#"><i class="bx bx-home"></i> <span>Home</span></a></li>
 
                 <li>
                     {% if  request.user.is_authenticated %}
-                      <a href="{% url 'dashboard' %}"><i class="bx bx-user"></i> Bienvendio {{ request.user.username }}</a>
+                      <a href="{% url 'dashboard' %}"><i class="bx bx-user"></i> Bienvenido {{ request.user.username }}</a>
                       {% else %}
                       <a href="{% url 'login' %}"><i class="bx bx-lock"></i> Login</a>
                     {% endif %}
