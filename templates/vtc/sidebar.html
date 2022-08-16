@@ -10,10 +10,10 @@
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{% static 'img/cart-plus-solid.svg' %} " alt="POS 1.0 Image">
+                <img src="{% static 'img/user_account_profile-256.webp' %} " alt="POS 1.0 Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">POS 1.0</a>
+                <a href="#" class="d-block">{{ request.user.username}}</a>
             </div>
         </div>
         <nav class="mt-2">

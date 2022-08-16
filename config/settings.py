@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'core.erp',
     'core.homepage',
     'core.login',
+    'core.user',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -113,7 +114,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / "static"
+STATIC_ROOT = BASE_DIR / "static/"
 STATICFILES_DIRS=[
   'static/lib/bootstrap-4.4.1-dist',
 
@@ -127,6 +128,8 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = '/erp/dashboard'
 LOGOUT_REDIRECT_URL = '/login/'
 LOGIN_URL = '/login/'
+
+AUTH_USER_MODEL= 'user.User'
 
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, "static"),

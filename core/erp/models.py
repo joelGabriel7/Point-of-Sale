@@ -14,7 +14,7 @@ class Category(models.Model):
     desc = models.CharField(max_length=500, null=True, blank=True, verbose_name='Descripcion')
 
     def __str__(self):
-        return f'Nombre:{self.name}'
+        return f'{self.name}'
 
     def toJson(self):
         item = model_to_dict(self)
@@ -39,7 +39,7 @@ class Product(models.Model):
     def get_image(self):
         if self.image:
             return '{}{}'.format(MEDIA_URL, self.image)
-        return f'{STATICFILES_DIRS}{"img/empty.png"}'
+        return f'{STATIC_URL}{"img/empty.png"}'
 
     class Meta:
         verbose_name = 'Producto'
