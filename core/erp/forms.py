@@ -1,5 +1,4 @@
 from django.forms import *
-
 from core.erp.models import *
 
 
@@ -33,17 +32,16 @@ class CategoryForms(ModelForm):
             ),
 
         }
+        exclude= ['user_creation', 'user_update']
 
     def save(self, commit=True):
         form = super()
         data = {}
-
         try:
             if form.is_valid():
                 form.save()
             else:
                 data['error'] = form.errors
-
         except Exception as e:
             data['error'] = str(e)
         return data
@@ -62,9 +60,9 @@ class CategoryForms(ModelForm):
 class ProductForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for form in self.visible_fields():
-            form.field.widget.attrs['class'] = 'form-control'
-            form.field.widget.attrs['autocomplete'] = 'off'
+        # for form in self.visible_fields():
+        #     form.field.widget.attrs['class'] = 'form-control'
+        #     form.field.widget.attrs['autocomplete'] = 'on'
         self.fields['name'].widget.attrs['autofocus'] = True
 
 

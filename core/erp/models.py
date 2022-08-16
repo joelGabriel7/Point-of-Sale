@@ -1,5 +1,6 @@
 import datetime
 
+from crum import get_current_user, get_current_request
 from django.db import models
 from django.forms import model_to_dict
 
@@ -8,13 +9,23 @@ from core.erp.choices import gender_choices
 
 
 # Create your models here.
+from core.models import BaseModel
 
-class Category(models.Model):
+
+class Category(BaseModel):
     name = models.CharField(max_length=50, verbose_name='Nombre', unique=True)
     desc = models.CharField(max_length=500, null=True, blank=True, verbose_name='Descripcion')
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name.capitalize}'
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        request = get_current_request()
+        if self.pk is None:
+            self.user_creation= request.user
+        else:
+            self.user_update = request.user
+        super(Category, self).save()
 
     def toJson(self):
         item = model_to_dict(self)

@@ -5,7 +5,6 @@
         <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title">
-
                     {% if action == 'add' %}
                         <i class="fas fa-plus"></i>
                     {% else %}
@@ -17,23 +16,34 @@
             </div>
             <div class="card-body">
                 {% csrf_token %}
-                        {{ form.non_field_errors }}
                 <input type="hidden" name="action" value="{{ action }}">
+                {% if form.errors %}
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-ban"></i> Ha ocurrido un error al querer guardar el registro</h5>
+                        <ul>
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
                 {% for field in form.visible_fields %}
                     <div class="form-group">
-                        <label for="name">{{ field.label }}:</label>
-                        {{ field }}
+                        <label for="email">{{ field.label }}:</label>
+                        {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
                     </div>
                 {% endfor %}
-
-
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary btnTest">
-                    <i class="fas fa-save"></i> Guardar Registro
+                <button type="submit" class="btn btn-primary btn-flat">
+                    <i class="fas fa-save"></i> Guardar registro
                 </button>
-                  <a href="{{ list_url }}" class="btn btn-danger btn-flat">
-                      <i class="fas fa-times"></i> Cancelar</a>
+                <a href="{{ list_url }}" class="btn btn-danger btn-flat">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
             </div>
         </div>
     </form>
@@ -56,37 +66,15 @@
             });
         {% endif %}
 
-
-      $('form').on('submit', function (e) {
-            e.preventDefault();
-            {#let parameters = $(this).serializeArray();#}
-          let parameters = new FormData(this);
-
-
-            $.ajax({
-                url: window.location.pathname,
-                type: 'POST',
-                data: parameters,
-                dataType: 'json',
-                processData: false,
-                contentType: false,
-            }).done(function (data) {
-                {#alert('guardado');#}
-                console.log(data)
-                if (!data.hasOwnProperty('error')) {
+        $(function () {
+            $('form').on('submit', function (e) {
+                e.preventDefault();
+                {#let parameters = $(this).serializeArray();#}
+                let parameters = new FormData(this);
+                submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de realizar la siguiente acción?', parameters, function () {
                     location.href = '{{ list_url }}';
-                    return false;
-
-                }
-                message_error(data.error);
-            }).fail(function (jqXHR, textStatus, errorThrown) {
-                alert(textStatus + ':' + errorThrown);
-            }).always(function (data) {
+                });
             });
-
-      });
-
-
-
+        });
     </script>
 {% endblock %}
