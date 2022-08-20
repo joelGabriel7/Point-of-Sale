@@ -32,7 +32,7 @@ class CategoryForms(ModelForm):
             ),
 
         }
-        exclude= ['user_creation', 'user_update']
+        exclude = ['user_creation', 'user_update']
 
     def save(self, commit=True):
         form = super()
@@ -46,7 +46,6 @@ class CategoryForms(ModelForm):
             data['error'] = str(e)
         return data
 
-
     # def clean(self):
     #     cleaned = super().clean()
     #     if len(cleaned['name']) <= 50:
@@ -56,7 +55,6 @@ class CategoryForms(ModelForm):
     #     return cleaned
 
 
-
 class ProductForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -64,7 +62,6 @@ class ProductForm(ModelForm):
         #     form.field.widget.attrs['class'] = 'form-control'
         #     form.field.widget.attrs['autocomplete'] = 'on'
         self.fields['name'].widget.attrs['autofocus'] = True
-
 
     class Meta:
         model = Product
@@ -76,6 +73,57 @@ class ProductForm(ModelForm):
                 }
             ),
         }
+
+    def save(self, commit=True):
+        data = {}
+        form = super()
+        try:
+            if form.is_valid():
+                form.save()
+            else:
+                data['error'] = form.errors
+        except Exception as e:
+            data['error'] = str(e)
+        return data
+
+
+class ClientForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['names'].widget.attrs['autofocus'] = True
+
+    class Meta:
+        model = Client
+        fields = '__all__'
+        widgets = {
+            'names': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese sus nombres',
+                }
+            ),
+            'surnames': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese sus apellidos',
+                }
+            ),
+            'dni': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese su dni',
+                }
+            ),
+            'date_birthday': DateInput(format='%Y-%m-%d',
+                                       attrs={
+                                           'value': datetime.datetime.now().strftime('%Y-%m-%d'),
+                                       }
+                                       ),
+            'address': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese su dirección',
+                }
+            ),
+            'gender': Select()
+        }
+        exclude = ['user_updated', 'user_creation']
 
     def save(self, commit=True):
         data = {}

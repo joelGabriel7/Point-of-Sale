@@ -1,13 +1,11 @@
 import datetime
 
-from crum import get_current_user, get_current_request
+from crum import get_current_request
 from django.db import models
 from django.forms import model_to_dict
 
-from config.settings import MEDIA_URL, STATIC_URL, STATIC_ROOT, STATICFILES_DIRS
+from config.settings import MEDIA_URL, STATIC_URL
 from core.erp.choices import gender_choices
-
-
 # Create your models here.
 from core.models import BaseModel
 
@@ -17,12 +15,12 @@ class Category(BaseModel):
     desc = models.CharField(max_length=500, null=True, blank=True, verbose_name='Descripcion')
 
     def __str__(self):
-        return f'{self.name.capitalize}'
+        return f'{self.name}'
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         request = get_current_request()
         if self.pk is None:
-            self.user_creation= request.user
+            self.user_creation = request.user
         else:
             self.user_update = request.user
         super(Category, self).save()
@@ -35,7 +33,6 @@ class Category(BaseModel):
         verbose_name = 'Categoria'
         verbose_name_plural = 'Categorias'
         ordering = ['id']
-
 
 
 class Product(models.Model):
@@ -61,13 +58,19 @@ class Product(models.Model):
 class Client(models.Model):
     names = models.CharField(max_length=150, verbose_name='Nombres')
     surnames = models.CharField(max_length=150, verbose_name='Apellidos')
-    dni = models.CharField(max_length=10, unique=True, verbose_name='Dni')
-    birthday = models.DateField(default=datetime.datetime.now, verbose_name='Fecha de nacimiento')
+    dni = models.CharField(max_length=15, unique=True, verbose_name='Dni')
+    date_birthday = models.DateField(default=datetime.datetime.now, verbose_name='Fecha de nacimiento')
     address = models.CharField(max_length=150, null=True, blank=True, verbose_name='Dirección')
-    sexo = models.CharField(max_length=10, choices=gender_choices, default='male', verbose_name='Sexo')
+    gender = models.CharField(max_length=10, choices=gender_choices, default='male', verbose_name='Sexo')
 
     def __str__(self):
         return self.names
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        item['gender'] = self.get_gender_display()
+        item['date_birthday'] = self.date_birthday.strftime('%Y-%m-%d')
+        return item
 
     class Meta:
         verbose_name = 'Cliente'

@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #lib
+    # lib
     'widget_tweaks',
-    #App
+    # App
     'core.erp',
     'core.homepage',
     'core.login',
@@ -116,8 +116,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "static/"
-STATICFILES_DIRS=[
-  'static/lib/bootstrap-4.4.1-dist',
+STATICFILES_DIRS = [
+    'static/lib/bootstrap-4.4.1-dist',
 
 ]
 
@@ -125,12 +125,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 MEDIA_URL = '/media/'
 
-
 LOGIN_REDIRECT_URL = '/erp/dashboard'
 LOGOUT_REDIRECT_URL = '/login/'
 LOGIN_URL = '/login/'
 
-AUTH_USER_MODEL= 'user.User'
+AUTH_USER_MODEL = 'user.User'
 
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, "static"),

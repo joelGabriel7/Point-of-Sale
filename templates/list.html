@@ -10,7 +10,6 @@
     <script src="{% static 'datatables-1.10.20/plugins/responsive-2.2.3/js/responsive.bootstrap4.min.js' %}"></script>
 
     {% block head_List %}
-
     {% endblock %}
 
 {% endblock %}
@@ -37,12 +36,15 @@
             </table>
         </div>
         <div class="card-footer">
-            <a class="btn btn-primary btnTest"  href="{{ create_url }}">
-                <i class="fas fa-plus" ></i> Nuevo Registro
-            </a>
-            <a class="btn btn-success "  href="{{list_url }}">
-               <i class="fas fa-sync"></i> Actualizar
-            </a>
+            {% block button_list %}
+                <a class="btn btn-primary btnTest" href="{{ create_url }}">
+                    <i class="fas fa-plus"></i> Nuevo Registro
+                </a>
+                <a class="btn btn-success " href="{{ list_url }}">
+                    <i class="fas fa-sync"></i> Actualizar
+                </a>
+            {% endblock %}
+
         </div>
     </div>
 
