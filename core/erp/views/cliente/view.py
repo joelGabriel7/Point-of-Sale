@@ -43,6 +43,9 @@ class ClientView(TemplateView):
                 cli.address = request.POST['address']
                 cli.gender = request.POST['gender']
                 cli.save()
+            elif action == 'delete':
+                cli = Client.objects.get(pk=request.POST['id'])
+                cli.delete()
             else:
                 data['error'] = 'Ha ocurrido un error'
         except Exception as e:

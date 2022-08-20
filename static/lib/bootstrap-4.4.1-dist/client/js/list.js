@@ -29,7 +29,7 @@ function getData() {
                 orderable: false,
                 render: function (data, type, row) {
                     var buttons = '<a href="#" rel="edit" class="btn btn-success btn-xs btn-flat "><i class="fas fa-edit"></i></a> ';
-                    buttons += '<a href="#" type="button" class="btn btn-danger btn-xs btn-flat"><i class="fas fa-trash-alt"></i></a>';
+                    buttons += '<a href="#" rel="delete"  class="btn btn-danger btn-xs btn-flat"><i class="fas fa-trash-alt"></i></a>';
                     return buttons;
                 }
             },
@@ -58,7 +58,8 @@ $(function () {
         $('form')[0].reset();
         $('#myModalClient').modal('show');
     });
-   $('#data tbody').on('click', 'a[rel="edit"]', function () {
+   $('#data tbody')
+       .on('click', 'a[rel="edit"]', function () {
        modal_title.find('span').html('Editar un cliente');
         console.log(modal_title.find('i'));
         modal_title.find('i').removeClass().addClass('fas fa-edit');
@@ -74,7 +75,19 @@ $(function () {
         $('select[name="gender"]').val(data.gender.id);
         $('#myModalClient').modal('show');
 
-   });
+   })
+       .on('click', 'a[rel="delete"]', function () {
+       let tr = tblClient.cell($(this).closest('td,li')).index();
+      let data = tblClient.row(tr.row).data();
+       let parameters = new FormData();
+       parameters.append('action', 'delete');
+       parameters.append('id', data.id);
+       submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de elminar el registro?', parameters, function () {
+           $('#myModalClient').modal('hide');
+           // getData();
+           tblClient.ajax.reload()
+       });
+});
     $('form').on('submit', function (e) {
         e.preventDefault();
         // {#let parameters = $(this).serializeArray();#}
