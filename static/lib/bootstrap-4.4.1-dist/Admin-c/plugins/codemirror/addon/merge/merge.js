@@ -535,7 +535,7 @@
       to.replaceRange(from.getRange(origStart, origEnd), editStart, editEnd)
   }
 
-  // Merge view, containing 0, 1, or 2 diff views.
+  // Merge view, containing 0, 1, or 2 diff test.
 
   var MergeView = CodeMirror.MergeView = function(node, options) {
     if (!(this instanceof MergeView)) return new MergeView(node, options);

@@ -2955,7 +2955,7 @@ var FullCalendar = (function (exports) {
             }
         };
         // Given a duration singular unit, like "week" or "day", finds a matching view spec.
-        // Preference is given to views that have corresponding buttons.
+        // Preference is given to test that have corresponding buttons.
         CalendarApi.prototype.getUnitViewSpec = function (unit) {
             var _a = this.getCurrentData(), viewSpecs = _a.viewSpecs, toolbarConfig = _a.toolbarConfig;
             var viewTypes = [].concat(toolbarConfig.viewsWithButtons);
@@ -6966,7 +6966,7 @@ var FullCalendar = (function (exports) {
     // Computes what the title at the top of the calendarApi should be for this view
     function buildTitle(dateProfile, viewOptions, dateEnv) {
         var range;
-        // for views that span a large unit of time, show the proper interval, ignoring stray days before and after
+        // for test that span a large unit of time, show the proper interval, ignoring stray days before and after
         if (/^(year|month)$/.test(dateProfile.currentRangeUnit)) {
             range = dateProfile.currentRange;
         }
@@ -11306,7 +11306,7 @@ var FullCalendar = (function (exports) {
         listenerRefiners: LISTENER_REFINERS,
     });
 
-    /* An abstract class for the daygrid views, as well as month view. Renders one or more rows of day cells.
+    /* An abstract class for the daygrid test, as well as month view. Renders one or more rows of day cells.
     ----------------------------------------------------------------------------------------------------------------------*/
     // It is a manager for a Table subcomponent, which does most of the heavy lifting.
     // It is responsible for managing width/height.
@@ -12396,7 +12396,7 @@ var FullCalendar = (function (exports) {
             var start = renderRange.start;
             var end = renderRange.end;
             var endOfWeek;
-            // year and month views should be aligned with weeks. this is already done for week
+            // year and month test should be aligned with weeks. this is already done for week
             if (/^(year|month)$/.test(currentRangeUnit)) {
                 start = dateEnv.startOfWeek(start);
                 // make end-of-week if not already
@@ -12555,7 +12555,7 @@ var FullCalendar = (function (exports) {
                 var dateProfile = _this.props.dateProfile;
                 var range = dateProfile.renderRange;
                 var dayCnt = diffDays(range.start, range.end);
-                var navLinkAttrs = (options.navLinks && dayCnt === 1) // only do in day views (to avoid doing in week views that dont need it)
+                var navLinkAttrs = (options.navLinks && dayCnt === 1) // only do in day test (to avoid doing in week test that dont need it)
                     ? { 'data-navlink': buildNavLinkData(range.start, 'week'), tabIndex: 0 }
                     : {};
                 if (options.weekNumbers && rowKey === 'day') {

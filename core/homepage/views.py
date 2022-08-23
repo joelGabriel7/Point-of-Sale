@@ -1,4 +1,4 @@
-# Create your views here.
+# Create your test here.
 from django.views.generic import TemplateView
 
 

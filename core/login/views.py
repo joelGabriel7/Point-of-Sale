@@ -2,7 +2,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.views import *
 from django.views.generic import RedirectView
 
-# Create your views here.
+# Create your test here.
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 

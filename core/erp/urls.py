@@ -4,6 +4,7 @@ from core.erp.views.category.views import *
 from core.erp.views.products.views import *
 from core.erp.views.dashboard.views import *
 from core.erp.views.cliente.view import *
+from core.erp.views.test.test import *
 
 urlpatterns = [
     path('category/list/', CategoryListView.as_view(), name='category_list'),
@@ -19,6 +20,8 @@ urlpatterns = [
     # client
     path('client/', ClientView.as_view(), name='client'),
     # Home
-    path('dashboard/', DashobardView.as_view(), name='dashboard')
+    path('dashboard/', DashobardView.as_view(), name='dashboard'),
+    # Test
+    path('test/', TestView.as_view(), name='test'),
 
 ]

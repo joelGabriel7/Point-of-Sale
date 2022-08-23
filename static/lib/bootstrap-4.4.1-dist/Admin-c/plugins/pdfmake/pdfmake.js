@@ -37130,7 +37130,7 @@ module.exports = {
 	            typedArray = new Uint8Array(typedArray);
 	        }
 
-	        // Convert other array views to uint8
+	        // Convert other array test to uint8
 	        if (
 	            typedArray instanceof Int8Array ||
 	            (typeof Uint8ClampedArray !== "undefined" && typedArray instanceof Uint8ClampedArray) ||
