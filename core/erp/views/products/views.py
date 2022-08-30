@@ -18,7 +18,6 @@ class ProductListView(ListView):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Listado de Productos'
@@ -26,6 +25,7 @@ class ProductListView(ListView):
         context['list_url'] = reverse_lazy('product_list')
         context['create_url'] = reverse_lazy('product_add')
         return context
+
 
 class ProductCreateView(CreateView):
     model = Product

@@ -23,8 +23,16 @@ class TestView(TemplateView):
             if action == 'search_product_id':
                 data = []
                 for i in Product.objects.filter(category_id=request.POST['id']):
-                    data.append({'id':i.id, 'name': i.name})
+                    data.append({'id': i.id, 'name': i.name})
                 pass
+            elif action == 'autocomplete':
+                data = []
+                for i in Category.objects.filter(name__icontains=request.POST['term']):
+                    item = i.toJson()
+                    item['value'] = i.name
+                    data.append(item)
+                print(data)
+
             else:
                 data['error'] = 'Ha ocurrido un error'
         except Exception as e:

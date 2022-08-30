@@ -146,3 +146,8 @@ class TestForm(Form):
     products = ModelChoiceField(queryset=Product.objects.none(), widget=Select(attrs={
         'class': 'form-control',
     }))
+
+    search = CharField(widget=TextInput(attrs={
+        'class':'form-control',
+        'placeholder':'Ingresa una descripcion'
+    }))
