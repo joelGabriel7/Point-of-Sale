@@ -1,20 +1,24 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import *
 from core.erp.forms import CategoryForms
+from core.erp.mixin import IsSuperuserMixin
 from core.erp.models import Category
 
 
-class CategoryListView(ListView):
+class CategoryListView(LoginRequiredMixin, IsSuperuserMixin, ListView):
     model = Category
     template_name = 'category/list.html'
 
     @method_decorator(login_required)
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
+
         return super().dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
@@ -42,7 +46,6 @@ class CategoryListView(ListView):
         context['create_url'] = reverse_lazy('category_add')
 
         return context
-
 
 
 class CategoryCreateView(CreateView):
@@ -144,8 +147,7 @@ class CategoryFormView(FormView):
     form_class = CategoryForms
     template_name = 'category/create.html'
     success_url = reverse_lazy('category_list')
-    
-    
+
     def form_valid(self, form):
         print(form.is_valid())
         print(form)
@@ -164,4 +166,3 @@ class CategoryFormView(FormView):
         context['action'] = 'add'
         # print(reverse_lazy('category_list'))
         return context
-
