@@ -1,2 +1,9 @@
 # SISTEMA DE VENTAS O PUNTO DE VENTAS WEB
-CREADO CON DJANGO 
+# Tecnologias
+Creado con Django, html, css js, 
+# librerias
+Ajax
+Datable
+boostrap
+AdmiLTE
+SweetAlert
