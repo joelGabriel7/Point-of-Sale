@@ -1,28 +1,30 @@
 {% extends 'layout.html' %}
 {% load static %}
 {% block head %}
-    <link rel="stylesheet" href="{% static 'datatables-1.10.20/css/dataTables.bootstrap4.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'lib/datatables-1.10.20/css/dataTables.bootstrap4.min.css' %}"/>
     <link rel="stylesheet"
-          href="{% static '/datatables-1.10.20/plugins/responsive-2.2.3/css/responsive.bootstrap4.min.css' %}"/>
-    <script src="{% static 'datatables-1.10.20/js/jquery.dataTables.js' %}"></script>
-    <script src="{% static 'datatables-1.10.20/js/dataTables.bootstrap4.min.js' %}"></script>
-    <script src="{% static 'datatables-1.10.20/plugins/responsive-2.2.3/js/dataTables.responsive.min.js' %}"></script>
-    <script src="{% static 'datatables-1.10.20/plugins/responsive-2.2.3/js/responsive.bootstrap4.min.js' %}"></script>
+          href="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/css/responsive.bootstrap4.min.css' %}"/>
+    <script src="{% static 'lib/datatables-1.10.20/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/js/responsive.bootstrap4.min.js' %}"></script>
 
-    {% block head_List %}
+    {% block head_list %}
+
     {% endblock %}
 
 {% endblock %}
+
 {% block content %}
-    <div class="card card-default">
-        <div class="card-header primary">
+    <div class="card card-primary">
+        <div class="card-header">
             <h3 class="card-title">
                 <i class="fas fa-search"></i>
-                {{ title }} / {{ date_now }}
+                {{ title }}
             </h3>
         </div>
         <div class="card-body">
-            <table class="table" id="data">
+            <table class="table table-bordered" id="data">
                 <thead>
                 {% block columns %}
 
@@ -36,45 +38,40 @@
             </table>
         </div>
         <div class="card-footer">
-            {% block button_list %}
-                <a class="btn btn-primary btnTest" href="{{ create_url }}">
-                    <i class="fas fa-plus"></i> Nuevo Registro
+            {% block buttons_list %}
+                <a href="{{ create_url }}" class="btn btn-primary btn-flat btnTest">
+                    <i class="fas fa-plus"></i> Nuevo registro
                 </a>
-                <a class="btn btn-success " href="{{ list_url }}">
+                <a href="{{ list_url }}" class="btn btn-success btn-flat">
                     <i class="fas fa-sync"></i> Actualizar
                 </a>
             {% endblock %}
-
         </div>
     </div>
+{% endblock %}
 
-    {% block JavaScript %}
-        <script type="application/javascript">
-            $(function () {
-                $('#data').DataTable({
-                    responsive: true,
-                    autoWidth: false,
-                    stateSave: true,
-                    "bDestroy": true
+{% block javascript %}
+    <script type="application/javascript">
+        $(function () {
+            $('#data').DataTable({
+                responsive: true,
+                autoWidth: false
+            });
 
-
-                });
-
-                $('.btnTest').on('click', function () {
-                    $.ajax({
-                        url: '{% url "category_list"%}',
-                        type: 'POST',
-                        data: {id:1},
-                        dataType: 'json'
-                    }).done(function (data) {
-                        console.log(data)
-                    }).fail(function ( jqXHR, textStatus,  errorThrown) {
-                        alert(textStatus+':'+errorThrown);
-                    }).always(function (data) {
-                    })
+            $('.btnTest').on('click', function () {
+                $.ajax({
+                    url: '{% url 'erp:category_list' %}',
+                    type: 'POST',
+                    data: {id: 1},
+                    dataType: 'json'
+                }).done(function (data) {
+                    console.log(data);
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    alert(textStatus + ': ' + errorThrown);
+                }).always(function (data) {
 
                 });
             });
-        </script>
-    {% endblock %}
+        });
+    </script>
 {% endblock %}

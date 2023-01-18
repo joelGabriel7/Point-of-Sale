@@ -1,26 +1,26 @@
 {% load static %}
 <aside class="main-sidebar sidebar-light-primary elevation-4">
-    <a href="#" class="brand-link">
-        <img src="{% static 'img/cart-plus-solid.svg' %}"
-             alt="POS 1.0 logo"
-             class="brand-image  "
+    <a href="{% url 'erp:dashboard' %}" class="brand-link">
+        <img src="{% static 'img/logo.png' %}"
+             alt="AdminLTE Logo"
+             class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light">POS 1.0</span>
+        <span class="brand-text font-weight-light">Hades</span>
     </a>
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{% static 'img/user_account_profile-256.webp' %} " alt="POS 1.0 Image">
+                <img src="{{ request.user.get_image }}" class="img-circle" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ request.user.username}}</a>
+                <a href="#" class="d-block">{{ request.user.username }}</a>
             </div>
         </div>
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-header">Mantenimientos</li>
                 <li class="nav-item">
-                    <a href="{% url 'category_list' %}" class="nav-link">
+                    <a href="{% url 'erp:category_list' %}" class="nav-link">
                         <i class="nav-icon fas fa-truck-loading"></i>
                         <p>
                             Categorías
@@ -28,7 +28,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{% url 'product_list' %}" class="nav-link">
+                    <a href="{% url 'erp:product_list' %}" class="nav-link">
                         <i class="nav-icon fas fa-boxes"></i>
                         <p>
                             Productos
@@ -36,7 +36,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{% url 'client' %}" class="nav-link">
+                    <a href="{% url 'erp:client_list' %}" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Clientes

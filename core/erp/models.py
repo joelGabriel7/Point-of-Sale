@@ -1,31 +1,21 @@
-import datetime
+from datetime import datetime
 
-from crum import get_current_request
 from django.db import models
 from django.forms import model_to_dict
 
 from config.settings import MEDIA_URL, STATIC_URL
 from core.erp.choices import gender_choices
-# Create your models here.
 from core.models import BaseModel
 
 
-class Category(BaseModel):
-    name = models.CharField(max_length=50, verbose_name='Nombre', unique=True)
-    desc = models.CharField(max_length=500, null=True, blank=True, verbose_name='Descripcion')
+class Category(models.Model):
+    name = models.CharField(max_length=150, verbose_name='Nombre', unique=True)
+    desc = models.CharField(max_length=500, null=True, blank=True, verbose_name='Descripción')
 
     def __str__(self):
-        return f'{self.name}'
-
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        request = get_current_request()
-        if self.pk is None:
-            self.user_creation = request.user
-        else:
-            self.user_update = request.user
-        super(Category, self).save()
-
-    def toJson(self):
+        return self.name
+        
+    def toJSON(self):
         item = model_to_dict(self)
         return item
 
@@ -37,17 +27,24 @@ class Category(BaseModel):
 
 class Product(models.Model):
     name = models.CharField(max_length=150, verbose_name='Nombre', unique=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Categorias')
-    image = models.ImageField(upload_to='product/%Y/%m/%d', null=True, blank=True)
+    cat = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Categoría')
+    image = models.ImageField(upload_to='product/%Y/%m/%d', null=True, blank=True, verbose_name='Imagen')
     pvp = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='Precio de venta')
 
     def __str__(self):
         return self.name
 
+    def toJSON(self):
+        item = model_to_dict(self)
+        item['cat'] = self.cat.toJSON()
+        item['image'] = self.get_image()
+        item['pvp'] = format(self.pvp, '.2f')
+        return item
+
     def get_image(self):
         if self.image:
             return '{}{}'.format(MEDIA_URL, self.image)
-        return f'{STATIC_URL}{"img/empty.png"}'
+        return '{}{}'.format(STATIC_URL, 'img/empty.png')
 
     class Meta:
         verbose_name = 'Producto'
@@ -58,8 +55,8 @@ class Product(models.Model):
 class Client(models.Model):
     names = models.CharField(max_length=150, verbose_name='Nombres')
     surnames = models.CharField(max_length=150, verbose_name='Apellidos')
-    dni = models.CharField(max_length=15, unique=True, verbose_name='Dni')
-    date_birthday = models.DateField(default=datetime.datetime.now, verbose_name='Fecha de nacimiento')
+    dni = models.CharField(max_length=10, unique=True, verbose_name='Dni')
+    date_birthday = models.DateField(default=datetime.now, verbose_name='Fecha de nacimiento')
     address = models.CharField(max_length=150, null=True, blank=True, verbose_name='Dirección')
     gender = models.CharField(max_length=10, choices=gender_choices, default='male', verbose_name='Sexo')
 
@@ -68,7 +65,7 @@ class Client(models.Model):
 
     def toJSON(self):
         item = model_to_dict(self)
-        item['gender'] = {'id': self.gender, 'name':self.get_gender_display()}
+        item['gender'] = {'id': self.gender, 'name': self.get_gender_display()}
         item['date_birthday'] = self.date_birthday.strftime('%Y-%m-%d')
         return item
 
@@ -80,7 +77,7 @@ class Client(models.Model):
 
 class Sale(models.Model):
     cli = models.ForeignKey(Client, on_delete=models.CASCADE)
-    date_joined = models.DateField(default=datetime.datetime.now)
+    date_joined = models.DateField(default=datetime.now)
     subtotal = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
     iva = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
     total = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)

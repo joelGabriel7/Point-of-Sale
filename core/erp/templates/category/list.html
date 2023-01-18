@@ -1,14 +1,15 @@
 {% extends 'list.html' %}
 {% load static %}
-{% block head_List %}
- <script src="{% static 'category/js/list.js' %}"></script>
+{% block head_list %}
+    <script src="{% static 'category/js/list.js' %}"></script>
 {% endblock %}
+
 {% block columns %}
     <tr>
-        <th scope="col">Nro</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Descripcion</th>
-        <th scope="col">Opciones</th>
+        <th scope="col" style="width: 10%;">Nro</th>
+        <th scope="col" style="width: 20%;">Nombre</th>
+        <th scope="col" style="width: 50%;">Descripción</th>
+        <th scope="col" style="width: 20%;">Opciones</th>
     </tr>
 {% endblock %}
 
@@ -16,6 +17,6 @@
 
 {% endblock %}
 
-{% block JavaScript %}
+{% block javascript %}
 
 {% endblock %}

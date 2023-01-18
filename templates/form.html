@@ -1,5 +1,10 @@
 {% extends 'layout.html' %}
 {% load widget_tweaks %}
+{% block head %}
+    {% block head_form %}
+
+    {% endblock %}
+{% endblock %}
 {% block content %}
     <form method="post" action="." enctype="multipart/form-data">
         <div class="card card-primary">
@@ -49,31 +54,27 @@
     </form>
     <script>
         {% if form.errors %}
-            let errors = '';
+            var errors = '';
             {% for field in form %}
-                {% for errors in field.errors %}
-                    errors += '{{ errors }}';
+                {% for error in field.errors %}
+                    errors += '{{ error }}\n';
                 {% endfor %}
             {% endfor %}
-            {% for errors in form.non_field_errors %}
-                errors += '{{ errors }}';
+            {% for error in form.non_field_errors %}
+                errors += '{{ error }}\n';
             {% endfor %}
-
             Swal.fire({
                 title: 'Error!',
                 text: errors,
-                icon: 'error',
+                icon: 'error'
             });
         {% endif %}
 
-        $(function () {
-            $('form').on('submit', function (e) {
-                e.preventDefault();
-                {#let parameters = $(this).serializeArray();#}
-                let parameters = new FormData(this);
-                submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de realizar la siguiente acción?', parameters, function () {
-                    location.href = '{{ list_url }}';
-                });
+        $('form').on('submit', function (e) {
+            e.preventDefault();
+            var parameters = new FormData(this);
+            submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de realizar la siguiente acción?', parameters, function () {
+                location.href = '{{ list_url }}';
             });
         });
     </script>

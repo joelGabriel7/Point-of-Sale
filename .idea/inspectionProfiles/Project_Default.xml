@@ -1,78 +1,30 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
+    <inspection_tool class="DjangoUnresolvedTemplateReferenceInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="DuplicatedCode" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <Languages>
-        <language minSize="264" name="Python" />
+        <language minSize="103" name="JavaScript" />
+        <language minSize="165" name="Python" />
       </Languages>
-    </inspection_tool>
-    <inspection_tool class="GrazieInspection" enabled="false" level="TYPO" enabled_by_default="false" />
-    <inspection_tool class="LanguageDetectionInspection" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="NonAsciiCharacters" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="PyByteLiteralInspection" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
-      <option name="ignoredErrors">
-        <list>
-          <option value="W292" />
-          <option value="E501" />
-          <option value="E305" />
-          <option value="W391" />
-          <option value="E225" />
-          <option value="E117" />
-          <option value="E111" />
-          <option value="E265" />
-          <option value="E303" />
-          <option value="E302" />
-          <option value="E261" />
-          <option value="E128" />
-        </list>
-      </option>
     </inspection_tool>
     <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="ignoredErrors">
         <list>
-          <option value="N806" />
-          <option value="N801" />
           <option value="N802" />
-          <option value="N803" />
+          <option value="N806" />
         </list>
       </option>
     </inspection_tool>
-    <inspection_tool class="PyRedeclarationInspection" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="PyShadowingBuiltinsInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
-      <option name="ignoredNames">
-        <list>
-          <option value="id" />
-        </list>
-      </option>
-    </inspection_tool>
-    <inspection_tool class="PyTypeCheckerInspection" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="PyUnboundLocalVariableInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyUnreachableCodeInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredIdentifiers">
         <list>
-          <option value="tkinter.Button.grip" />
-          <option value="persona_dao.persoid" />
-          <option value="property.*" />
-          <option value="list.upper" />
-          <option value="usuarios.models.Usuario.objects" />
-          <option value="accounts.models.Account.*" />
-          <option value="orders.views.payment_id" />
-          <option value="accounts.models.Manager" />
-          <option value="list.choice" />
-          <option value="str.*" />
-          <option value="list.*" />
-          <option value="tuple.split" />
-          <option value="bool.replace" />
-          <option value="int.replace" />
-          <option value="pytube.streams.Stream.streams" />
+          <option value="object.get_context_data" />
+          <option value="int.Next" />
+          <option value="list.sorted" />
         </list>
       </option>
-    </inspection_tool>
-    <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
-      <option name="processCode" value="true" />
-      <option name="processLiterals" value="true" />
-      <option name="processComments" value="true" />
     </inspection_tool>
   </profile>
 </component>

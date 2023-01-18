@@ -5,31 +5,34 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" href="{% static 'img/empty.png' %}" type="image/png"/>
     <title>{{ title }}</title>
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="{% static 'Admin-c/plugins/fontawesome-free/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/adminlte-3.0.4/plugins/font-awesome-5.11.1/css/all.min.css' %}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{% static 'Admin-c/css/adminlte.min.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/adminlte-3.0.4/css/adminlte.min.css' %}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- jQuery -->
-    <script src="{% static 'Admin-c/plugins/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'lib/adminlte-3.0.4/plugins/jquery/jquery.min.js' %}"></script>
     <!-- Bootstrap 4 -->
-    <script src="{% static 'Admin-c/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'lib/adminlte-3.0.4/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
     <!-- AdminLTE App -->
-    <script src="{% static 'Admin-c/js/adminlte.min.js' %}"></script>
-    <!-- sweetalert App -->
-    <script src="{% static 'sweetalert2-9.10.0/sweetalert2.all.min.js' %}"></script>
+    <script src="{% static 'lib/adminlte-3.0.4/js/adminlte.min.js' %}"></script>
+    <!-- Sweetalert2 -->
+    <script src="{% static 'lib/sweetalert2-9.10.0/sweetalert2.all.min.js' %}"></script>
     <!-- Jquery Confirm -->
-    <script src="{% static 'jquery-confirm-v3.3.4/jquery-confirm.min.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'jquery-confirm-v3.3.4/jquery-confirm.min.css' %}">
-    <!-- Block Head-->
+    <link rel="stylesheet" href="{% static 'lib/jquery-confirm-v3.3.4/jquery-confirm.min.css' %}">
+    <script src="{% static 'lib/jquery-confirm-v3.3.4/jquery-confirm.min.js' %}"></script>
+    <!-- My css -->
+    <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+    <!-- Functions -->
+    <script src="{% static 'js/functions.js' %}"></script>
+    <!-- Block head -->
     {% block head %}
 
     {% endblock %}
-    <script src="{% static 'js/functions.js' %}"></script>
 </head>
-
 {% block body %}
 
 {% endblock %}
