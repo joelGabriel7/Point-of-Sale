@@ -1,8 +1,10 @@
 {% extends 'layout.html' %}
 {% load widget_tweaks %}
+{% load static %}
 {% block head %}
     {% block head_form %}
-
+        <script src="{% static 'lib/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js' %}"></script>
+        <link href="{% static 'lib/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css' %}">
     {% endblock %}
 {% endblock %}
 {% block content %}
@@ -52,6 +54,16 @@
             </div>
         </div>
     </form>
+
+     <script type="text/javascript">
+            $(function () {
+                $('#date_birthday').datetimepicker({
+                    format: 'YYYY-MM-DD',
+                    date: moment().format('YYYY-MM-DD'),
+                    locale: 'es',
+                });
+            });
+        </script>
     <script>
         {% if form.errors %}
             var errors = '';

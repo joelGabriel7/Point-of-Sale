@@ -101,13 +101,19 @@ class ClientForm(ModelForm):
             'dni': TextInput(
                 attrs={
                     'placeholder': 'Ingrese su dni',
+
                 }
             ),
-            'date_birthday': DateInput(format='%Y-%m-%d',
-                                       attrs={
-                                           'value': datetime.now().strftime('%Y-%m-%d'),
-                                       }
-                                       ),
+            'date_birthday': DateInput(
+                format='%Y-%m-%d',
+                attrs={
+                    'value': datetime.today().strftime('%Y-%m-%d'),
+                    'autocomplete': 'off',
+                    'class': 'form-control datetimepicker-input ',
+                    'id': 'date_birthday',
+                    'data-target': '#date_birthday',
+                    'data-toggle': 'datetimepicker'
+                }),
             'address': TextInput(
                 attrs={
                     'placeholder': 'Ingrese su dirección',
@@ -168,6 +174,11 @@ class SaleForm(ModelForm):
         self.fields['cli'].widget.attrs['class'] = 'form-control select2'
         self.fields['cli'].widget.attrs['style'] = 'width: 100%'
 
+        # Forma 2
+        # self.fields['date_joined'].widget.attrs = {
+        #
+        # }
+
     class Meta:
         model = Sale
         fields = '__all__'
@@ -178,12 +189,27 @@ class SaleForm(ModelForm):
                 'style': 'width: 100%'
             }),
 
-            'date_joined': DateInput(format='%Y-%m-%d',
-                                     attrs={
-                                         # 'class': 'form-control',
-                                         'value': datetime.now().strftime('%Y-%m-%d'),
-                                     }
-                                     ),
+            'date_joined': DateInput(
+                format='%Y-%m-%d',
+                attrs={
+                    # 'class': 'form-control',
+                    'value': datetime.now().strftime('%Y-%m-%d'),
+                    'autocomplete': 'off',
+                    'class': 'form-control input-group date  datetimepicker-input',
+                    'id': 'date_joined',
+                    'data-target': '#date_joined',
+                    'data-toggle': 'datetimepicker'
+                }),
+
+            'subtotal': TextInput(attrs={
+                'disabled': True
+            }),
+            'iva': TextInput(attrs={
+                'class': 'form-control'
+            }),
+            'total': TextInput(attrs={
+                'disabled': True
+            })
 
         }
 
