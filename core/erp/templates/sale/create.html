@@ -1,13 +1,20 @@
 {% extends 'list.html' %}
 {% load static %}
 {% block head_list %}
+
+    <link href="{% static 'lib/jquery-ui-1.12.1/jquery-ui.min.css' %}" rel="stylesheet"/>
+    <script src="{% static 'lib/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+
+
     <link href="{% static 'lib/select2-4.0.13/css/select2.min.css' %}" rel="stylesheet"/>
     <link href="{% static 'lib/select2-4.0.13/css/select2-bootstrap4.min.css' %}" rel="stylesheet"/>
     <script src="{% static 'lib/select2-4.0.13/js/select2.min.js' %}"></script>
     <script src="{% static 'lib/select2-4.0.13/js/i18n/es.js' %}"></script>
+
     <script src="{% static 'lib/moment-2.25.3/moment-with-locales.js' %}"></script>
     <script src="{% static 'lib/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js' %}"></script>
     <link href="{% static 'lib/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css' %}">
+
     <link href="{% static 'lib/bootstrap-touchspin-4.3.0/jquery.bootstrap-touchspin.css' %}">
     <script src="{% static 'lib/bootstrap-touchspin-4.3.0/jquery.bootstrap-touchspin.js' %}"></script>
     <script src="{% static 'sale/js/form.js' %}"></script>
@@ -39,21 +46,25 @@
                             <div class="form-group">
                                 <label>Buscador de productos: </label>
                                 <div class="input-group ">
-                                    <input type="text" class="form-control"
+                                    <input type="text" class="form-control" name="search"
                                            placeholder="Ingresa una descripcion de producto" autocomplete="off">
                                     <span class="input-group-append">
-                    <button type="button" class="btn btn-danger "><i class="fas fa-times"></i></button>
-                    </span>
+                                        <button type="button" class="btn btn-danger "><i class="fas fa-times"></i></button>
+                                    </span>
                                 </div>
                             </div>
                             <hr>
-                            <table class="table table-bordered" id="data">
+                            <button type="button" class=" btn btn-danger btn-xs btn-flat btnRemoveAll">
+                                <i class="fas fa-trash-alt"></i> Eliminar todos los productos de la factura
+                            </button>
+                            <hr>
+                            <table class="table table-bordered" id="tblProducts">
                                 <thead>
                                 <tr>
                                     <th>Eliminar</th>
                                     <th>Producto</th>
                                     <th>Categoria</th>
-                                    <th>Precio</th>
+                                    <th>PVP</th>
                                     <th>Cantidad</th>
                                     <th>Subtotal</th>
 
@@ -94,6 +105,11 @@
                                 <label>Itbis:</label>
                                 {{ form.iva }}
                             </div>
+
+                             <div class="form-group">
+                                <label>Itbis Calculado:</label>
+                                <input type="text" class="form-control" readonly name="ivacalc" value="0.00">
+                            </div>
                             <div class="form-group">
                                 <label>Total a pagar:</label>
                                 {{ form.total }}
@@ -113,8 +129,8 @@
                 <a href="#" class="btn btn-primary btn-flat btnTest">
                     <i class="fas fa-plus"></i> Nuevo registro
                 </a>
-                <a href="{{ list_url }}" class="btn btn-success btn-flat">
-                    <i class="fas fa-sync"></i> Actualizar
+                <a href="{{sale_create }}" class="btn btn-danger btn-flat">
+                    <i class="fas fa-times"></i> Cancelar
                 </a>
             {% endblock %}
         </div>
