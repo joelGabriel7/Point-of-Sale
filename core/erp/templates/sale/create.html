@@ -21,7 +21,8 @@
 {% endblock %}
 
 {% block content %}
-    <div class="card card-primary">
+    <form method="post">
+      <div class="card card-primary">
         <div class="card-header">
             <h3 class="card-title">
 
@@ -49,7 +50,7 @@
                                     <input type="text" class="form-control" name="search"
                                            placeholder="Ingresa una descripcion de producto" autocomplete="off">
                                     <span class="input-group-append">
-                                        <button type="button" class="btn btn-danger "><i class="fas fa-times"></i></button>
+                                        <button type="button" class="btn btn-danger btnClearSearch "><i class="fas fa-times"></i></button>
                                     </span>
                                 </div>
                             </div>
@@ -85,6 +86,7 @@
                         </div>
 
                         <div class="card-body">
+                            <input type="hidden" name="action" value="{{ action }}">
                             <div class="form-group">
                                 <label>Fecha de Venta: </label>
                                 {{ form.date_joined }}
@@ -126,13 +128,15 @@
         </div>
         <div class="card-footer">
             {% block buttons_list %}
-                <a href="#" class="btn btn-primary btn-flat btnTest">
+                <button type="submit" class="btn btn-primary btn-flat btnTest">
                     <i class="fas fa-plus"></i> Nuevo registro
-                </a>
+                </button>
                 <a href="{{sale_create }}" class="btn btn-danger btn-flat">
                     <i class="fas fa-times"></i> Cancelar
                 </a>
             {% endblock %}
         </div>
     </div>
+    </form>
+
 {% endblock %}

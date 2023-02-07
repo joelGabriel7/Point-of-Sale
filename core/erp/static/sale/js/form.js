@@ -108,15 +108,12 @@ $(function () {
         theme: "bootstrap4",
         language: 'es'
     });
-    $('#date_joined').datetimepicker({
-        format: 'DD-MM-YYYY',
-        date: moment().format('YYYY-MM-DD'),
+  $('#date_joined').datetimepicker({
+        format: 'YYYY-MM-DD',
+        date: moment().format("YYYY-MM-DD"),
         locale: 'es',
-
-        minDate: moment().format('YYYY-MM-DD'),
-
+        //minDate: moment().format("YYYY-MM-DD")
     });
-
 
     $("input[name='iva']").TouchSpin({
         min: 0,
@@ -182,7 +179,7 @@ $(function () {
     $('#tblProducts tbody')
         .on('click', 'a[rel="remove"]', function () {
             var tr = tblProducts.cell($(this).closest('td, li')).index();
-            alert_action('Notificación', '¿Estas seguro de eliminar el producto de tu detalle?', function () {
+            alert_action('Notificación', '¿Estas seguro de elminar todo?', function () {
                 vents.items.products.splice(tr.row, 1);
                 vents.list();
             });
@@ -196,4 +193,31 @@ $(function () {
             vents.calculate_invoice();
             $('td:eq(5)', tblProducts.row(tr.row).node()).html('$' + vents.items.products[tr.row].subtotal.toFixed(2))
         });
+    $('.btnClearSearch').on('click', function () {
+       $('input[name="search"]').val('').focus()
+    })
+
+
+    // Event Submit
+    // vents.items.date_joined = $('input[name="date_joined"]').val();
+    //        vents.items.cli = $('select[name="cli"]').val();
+    //        var parameters = new FormData();
+    //        parameters.append('action', $('input[name="action"]').val());
+    //        parameters.append('vents', JSON.stringify(vents.items));
+    $('form').on('submit', function (e) {
+        e.preventDefault();
+        if(vents.items.products.length ===0){
+            message_error('Debe tener un producto para realizar el regitro');
+            return false;
+        }
+        vents.items.date_joined= $('input[name="date_joined"]').val();
+        vents.items.cli= $('select[name="cli"]').val();
+        var parameters = new FormData();
+        parameters.append('action', $('input[name="action"]').val())
+        parameters.append('vents',  JSON.stringify(vents.items));
+        submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de realizar la siguiente acción?', parameters, function () {
+            location.href = '/erp/dashboard/';
+        });
     });
+    vents.list()
+});
