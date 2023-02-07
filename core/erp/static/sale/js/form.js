@@ -1,4 +1,3 @@
-
 var tblProducts;
 var vents = {
     items: {
@@ -178,12 +177,15 @@ $(function () {
 
 
     });
-    // event cant
+
+      // event cant
     $('#tblProducts tbody')
         .on('click', 'a[rel="remove"]', function () {
-            var tr = tblProducts.cell($(this).closest('td,li')).index();
-            vents.items.products.splice(tr.row, 1)
-            vents.list()
+            var tr = tblProducts.cell($(this).closest('td, li')).index();
+            alert_action('Notificación', '¿Estas seguro de eliminar el producto de tu detalle?', function () {
+                vents.items.products.splice(tr.row, 1);
+                vents.list();
+            });
         })
         .on('change', 'input[name="cant"]', function () {
 
