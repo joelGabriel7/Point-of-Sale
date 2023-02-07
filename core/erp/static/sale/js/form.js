@@ -170,10 +170,10 @@ $(function () {
 
     $('.btnRemoveAll').on('click', function () {
         if (vents.items.products.length === 0) return false;
-           // alert_action('Notificacion', 'Estas seguro de elminar todo?', function () {
-               vents.items.products = []
-               vents.list();
-           // })
+           alert_action('Notificacion', 'Estas seguro de elminar todo?', function () {
+              vents.items.products=[]
+               vents.list()
+           });
 
 
 
@@ -194,4 +194,4 @@ $(function () {
             vents.calculate_invoice();
             $('td:eq(5)', tblProducts.row(tr.row).node()).html('$' + vents.items.products[tr.row].subtotal.toFixed(2))
         });
-});
+    });
