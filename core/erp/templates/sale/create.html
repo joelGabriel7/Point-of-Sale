@@ -50,7 +50,7 @@
                                     <input type="text" class="form-control" name="search"
                                            placeholder="Ingresa una descripcion de producto" autocomplete="off">
                                     <span class="input-group-append">
-                                        <button type="button" class="btn btn-danger btnClearSearch "><i class="fas fa-times"></i></button>
+                                        <button type="button" class="btn btn-danger btn btnClearSearch "><i class="fas fa-times"></i></button>
                                     </span>
                                 </div>
                             </div>
@@ -129,9 +129,9 @@
         <div class="card-footer">
             {% block buttons_list %}
                 <button type="submit" class="btn btn-primary btn-flat btnTest">
-                    <i class="fas fa-plus"></i> Nuevo registro
+                    <i class="fas fa-plus"></i> Guardar registro
                 </button>
-                <a href="{{sale_create }}" class="btn btn-danger btn-flat">
+                <a href="{{ list_url }}" class="btn btn-danger btn-flat">
                     <i class="fas fa-times"></i> Cancelar
                 </a>
             {% endblock %}
