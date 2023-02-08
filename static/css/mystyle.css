@@ -24,3 +24,13 @@ table.table-bordered.dataTable tbody td {
 .card-footer{
     border-top: 1px solid #dee2e6;
 }
+.btn{
+    color: white !important;
+}
+td.dt-control {
+    background: url('../lib/datatables-1.10.20/images/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.dt-control {
+    background: url('../lib/datatables-1.10.20/images/details_close.png') no-repeat center center;
+}

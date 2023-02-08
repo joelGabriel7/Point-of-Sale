@@ -47,11 +47,8 @@
                             <div class="form-group">
                                 <label>Buscador de productos: </label>
                                 <div class="input-group ">
-                                    <input type="text" class="form-control" name="search"
-                                           placeholder="Ingresa una descripcion de producto" autocomplete="off">
-                                    <span class="input-group-append">
-                                        <button type="button" class="btn btn-danger btn btnClearSearch "><i class="fas fa-times"></i></button>
-                                    </span>
+                                        <select class="form-control select2" style="width: 100%" name="search"></select>
+
                                 </div>
                             </div>
                             <hr>
@@ -138,5 +135,11 @@
         </div>
     </div>
     </form>
+    <script>
+        {#vents.items.products = {{ detalle|safe }}#}
+        {#    vents.list()#}
 
+        vents.items.products={{ det|safe }};
+        vents.list()
+    </script>
 {% endblock %}
