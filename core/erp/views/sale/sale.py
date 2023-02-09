@@ -2,9 +2,10 @@ import json
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
+from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
 from core.erp.forms import SaleForm
@@ -12,7 +13,12 @@ from core.erp.mixins import ValidatePermissionRequiredMixin
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView
 
 from core.erp.models import Sale, Product, DetSale
-
+import os
+from django.conf import settings
+from django.http import HttpResponse
+from django.template import Context
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 
 class SaleListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListView):
     model = Sale
@@ -202,3 +208,18 @@ class SaleDeleteView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Delete
         context['entity'] = 'Ventas'
         context['list_url'] = self.success_url
         return context
+
+class SaleInvoicePdfView(View):
+    def get(self, request, *args, **kwargs):
+        try:
+            template = get_template('sale/invoice.html')
+            context = {'title': 'Mi primer pdf'}
+            html = template.render(context)
+            response = HttpResponse(content_type='application/pdf')
+            #response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+            pisaStatus = pisa.CreatePDF(
+                html, dest=response)
+            return response
+        except:
+            pass
+        return HttpResponseRedirect(reverse_lazy('erp:sale_list'))
