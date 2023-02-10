@@ -110,7 +110,7 @@ function formatRepo(repo) {
     }
 
     var option = $(
-        '<div class="wrapper container">'+
+        '<div class="wrapper container">' +
         '<div class="row">' +
         '<div class="col-lg-1">' +
         '<img src="' + repo.image + '" class="img-fluid img-thumbnail d-block mx-auto rounded">' +
@@ -120,7 +120,7 @@ function formatRepo(repo) {
         '<p style="margin-bottom: 0;">' +
         '<b>Nombre:</b> ' + repo.name + '<br>' +
         '<b>Categoría:</b> ' + repo.cat.name + '<br>' +
-        '<b>PVP:</b> <span class="badge badge-warning">$'+repo.pvp+'</span>'+
+        '<b>PVP:</b> <span class="badge badge-warning">$' + repo.pvp + '</span>' +
         '</p>' +
         '</div>' +
         '</div>' +
@@ -128,6 +128,7 @@ function formatRepo(repo) {
 
     return option;
 }
+
 $(function () {
     $('.select2').select2({
         theme: "bootstrap4",
@@ -196,6 +197,8 @@ $(function () {
         alert_action('Notificacion', 'Estas seguro de elminar todo?', function () {
             vents.items.products = []
             vents.list()
+        },function () {
+            
         });
 
 
@@ -241,8 +244,14 @@ $(function () {
         var parameters = new FormData();
         parameters.append('action', $('input[name="action"]').val())
         parameters.append('vents', JSON.stringify(vents.items));
-        submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de realizar la siguiente acción?', parameters, function () {
-            location.href = '/erp/sale/list';
+        submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de realizar la siguiente acción?', parameters, function (response) {
+                    alert_action('Alerta!','Quiere imprimir la factura?', function () {
+                         window.open('/erp/sale/invoice/pdf/'+response.id+'/', '_blank');
+                          location.href = '/erp/sale/list';
+                    }, function () {
+                        location.href = '/erp/sale/list';
+                    });
+            // location.href = '/erp/sale/list';
         });
     });
     vents.list()
@@ -277,6 +286,7 @@ $(function () {
         data.cant = 1;
         data.subtotal = 0.00;
         vents.add(data);
-        $(this).val('').trigger('change.select2');;
+        $(this).val('').trigger('change.select2');
+        ;
     });
 });
