@@ -20,6 +20,7 @@ from django.template import Context
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 
+
 class SaleListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListView):
     model = Sale
     template_name = 'sale/list.html'
@@ -209,16 +210,56 @@ class SaleDeleteView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Delete
         context['list_url'] = self.success_url
         return context
 
+
 class SaleInvoicePdfView(View):
+
+    def link_callback(self, uri, rel):
+        """
+        Convert HTML URIs to absolute system paths so xhtml2pdf can access those
+        resources
+        """
+        # result = finders.find(uri)
+        # if result:
+        #     if not isinstance(result, (list, tuple)):
+        #         result = [result]
+        #     result = list(os.path.realpath(path) for path in result)
+        #     path = result[0]
+        # else:
+        sUrl = settings.STATIC_URL  # Typically /static/
+        sRoot = settings.STATIC_ROOT  # Typically /home/userX/project_static/
+        mUrl = settings.MEDIA_URL  # Typically /media/
+        mRoot = settings.MEDIA_ROOT  # Typically /home/userX/project_static/media/
+
+        if uri.startswith(mUrl):
+            path = os.path.join(mRoot, uri.replace(mUrl, ""))
+        elif uri.startswith(sUrl):
+            path = os.path.join(sRoot, uri.replace(sUrl, ""))
+        else:
+            return uri
+
+        # make sure that file exists
+        if not os.path.isfile(path):
+            raise Exception(
+                'media URI must start with %s or %s' % (sUrl, mUrl)
+            )
+        return path
+
     def get(self, request, *args, **kwargs):
         try:
             template = get_template('sale/invoice.html')
-            context = {'title': 'Mi primer pdf'}
+            context = {
+                'sale': Sale.objects.get(pk=self.kwargs['pk']),
+                'comp': {'name': 'PRONORTE J.R.S',
+                         'ruc': '8888888888888888888888', 'address': 'Dajabón,Republica Dominicana'},
+                'icon': '{}{}'.format(settings.STATIC_URL, 'img/logo.png')
+            }
             html = template.render(context)
             response = HttpResponse(content_type='application/pdf')
-            #response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+            # response['Content-Disposition'] = 'attachment; filename="factura.pdf"'
             pisaStatus = pisa.CreatePDF(
-                html, dest=response)
+                html, dest=response,
+                link_callback=self.link_callback
+            )
             return response
         except:
             pass
