@@ -1,0 +1,56 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+<script type="text/javascript" src="{% static 'lib/moment-2.25.3/moment.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/daterangepicker-master/spanish.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/daterangepicker-master/daterangepicker.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/daterangepicker-master/daterangepicker.css' %}" />
+<script type="text/javascript" src="{% static 'sale/js/report.js' %}"></script>
+
+{% endblock %}
+
+{% block content %}
+        <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">
+                <i class="fas fa-chart-bar"></i>
+                {{ title }}
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>Rango de fecha:</label>
+                        {{ form.date_range }}
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <table class="table table-bordered" id="data">
+                <thead>
+                <tr>
+                    <th scope="col">Nro</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Fecha de registro</th>
+                    <th scope="col">Subtotal</th>
+                    <th scope="col">Itbis</th>
+                    <th scope="col">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            {% block buttons_list %}
+               <a href="{{ list_url }}" class="btn btn-success btn-flat">
+                    <i class="fas fa-sync"></i> Actualizar
+                </a>
+
+            {% endblock %}
+        </div>
+    </div>
+
+{% endblock  %}
