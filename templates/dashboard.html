@@ -17,10 +17,17 @@
             </div>
         </div>
     </div>
-
+    <hr>
+     <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="container-pie"></div>
+            </div>
+        </div>
+    </div>
+    <br>
     <script type="application/javascript">
-
-        Highcharts.chart('container', {
+        var graphcolum= Highcharts.chart('container', {
             chart: {
                 type: 'column'
             },
@@ -68,12 +75,87 @@
                     borderWidth: 0
                 }
             },
-            series: [{
-                name: 'Porcentaje de venta',
-                showInLegend: false,
-                colorByPoint: true,
-                data:{{ graph_sales_year|safe }}
-            }]
+
         });
+         var graphPie= Highcharts.chart('container-pie', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Porcentaje de Productos vendidos en el mes actual , 2023',
+                align: 'center'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
+                }
+            },
+
+        });
+        function get_graph_sales_year() {
+            $.ajax({
+                url: window.location.pathname, //window.location.pathname
+                type: 'POST',
+                data: {
+                    'action': 'get_graph_sales_year'
+                },
+                dataType: 'json',
+            }).done(function (data) {
+                if (!data.hasOwnProperty('error')) {
+                    graphcolum.addSeries(data)
+                    return false;
+                }
+                message_error(data.error);
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                alert(textStatus + ': ' + errorThrown);
+            }).always(function (data) {
+
+            });
+
+        }
+
+        function get_graph_sales_products_year_month() {
+            $.ajax({
+                url: window.location.pathname, //window.location.pathname
+                type: 'POST',
+                data: {
+                    'action': 'get_graph_sales_products_year_month'
+                },
+                dataType: 'json',
+            }).done(function (data) {
+                if (!data.hasOwnProperty('error')) {
+                    graphPie.addSeries(data);
+                    return false;
+                }
+                message_error(data.error);
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                alert(textStatus + ': ' + errorThrown);
+            }).always(function (data) {
+
+            });
+
+        }
+        $(function () {
+           get_graph_sales_year();
+
+           get_graph_sales_products_year_month()
+        });
+
     </script>
 {% endblock %}
