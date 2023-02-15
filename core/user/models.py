@@ -21,11 +21,13 @@ class User(AbstractUser):
         item['image'] = self.get_image()
         return item
 
-    def save(self, *args, **kwargs):
-        if self.pk is None:
-            self.set_password(self.password)
-        else:
-            user = User.objects.get(pk=self.pk)
-            if user.password != user:
-                self.set_password(self.password)
-        super().save(*args, **kwargs)
+
+    # Esta forma resuelve un problema pero me impide crear un super usuario
+    # def save(self, *args, **kwargs):
+    #     if self.pk is None:
+    #         self.set_password(self.password)
+    #     else:
+    #         user = User.objects.get(pk=self.pk)
+    #         if user.password != user:
+    #             self.set_password(self.password)
+    #     super().save(*args, **kwargs)
