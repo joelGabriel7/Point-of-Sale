@@ -51,9 +51,10 @@
                     title: 'Alerta!',
                     text: 'Registro eliminado correctamente!',
                     icon: 'success',
-                    timer: 1500
-                }).then((result) => {
-                   location.href = '{{ list_url }}';
+                    timer: 1500,
+                    onClose: () =>{
+                        location.href = '{{ list_url }}';
+                    }
                 });
 
 

@@ -93,9 +93,10 @@
                     title: 'Alerta!',
                     text: 'Registro agregado correctamente!',
                     icon: 'success',
-                    timer: 2000
-                }).then((result) => {
-                    location.href = '{{ list_url }}';
+                    timer: 2000,
+                    onClose: () => {
+                        location.href = '{{ list_url }}';
+                    }
                 });
             });
         });
