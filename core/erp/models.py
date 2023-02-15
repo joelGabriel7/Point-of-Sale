@@ -53,7 +53,7 @@ class Product(models.Model):
 
 
 class Client(models.Model):
-    names = models.CharField(max_length=150, verbose_name='Nombres')
+    names = models.CharField(max_length=150, verbose_name='Nombres', default='admin')
     surnames = models.CharField(max_length=150, verbose_name='Apellidos')
     dni = models.CharField(max_length=10, unique=True, verbose_name='Dni')
     date_birthday = models.DateField(default=datetime.now, verbose_name='Fecha de nacimiento')

@@ -55,10 +55,11 @@ class DashboardView(TemplateView):
     def get_graph_sales_products_year_month(self):
         data = []
         year = datetime.now().year
-        month =  datetime.now().month
+        month = datetime.now().month
         try:
             for p in Product.objects.all():
-                total = DetSale.objects.filter(sale__date_joined__year=year, sale__date_joined__month=month,prod_id=p.id).aggregate(
+                total = DetSale.objects.filter(sale__date_joined__year=year, sale__date_joined__month=month,
+                                               prod_id=p.id).aggregate(
                     r=Cast(Sum('cant', default=0), output_field=FloatField())).get('r')
                 if total > 0:
                     data.append({
@@ -71,6 +72,7 @@ class DashboardView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['title'] = 'Dashboard'
         context['panel'] = 'Panel de administrador'
         context['graph_sales_year'] = self.get_graph_sales_year()
         return context
