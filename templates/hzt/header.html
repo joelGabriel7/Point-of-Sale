@@ -39,16 +39,19 @@
         </div>
 
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-            {% if request.user.groups.all %}
+           {% if request.user.groups.all %}
                 <li class="nav-item dropdown">
                     <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                       class="nav-link dropdown-toggle" style="color:#FFFFFF;">Roles</a>
-                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"
-                        style="left: 0px; right: inherit;">
-                        {% for grupo in  request.user.groups.all %}
-                            <li><a href="#" class="dropdown-item">{{ grupo.name }} </a></li>
+                       class="nav-link {% if request.user.groups.all.count > 1 %}dropdown-toggle{% endif %}" style="color:#FFFFFF;">{{ request.session.group }}</a>
+                {% if request.user.groups.all.count > 1 %}
+                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="left: 0px; right: inherit;">
+                        {% for g in  request.user.groups.all %}
+                            {% if g.id != request.session.group.id  %}
+                            <li><a href="{% url 'user:user_change_group' g.id %}" class="dropdown-item">{{ g.name }} </a></li>
+                            {% endif %}
                         {% endfor %}
                     </ul>
+                {% endif %}
                 </li>
             {% endif %}
 

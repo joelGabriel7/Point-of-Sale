@@ -61,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'crum.CurrentRequestUserMiddleware'
 
 ]
 
@@ -143,3 +144,5 @@ MEDIA_URL = '/media/'
 AUTH_USER_MODEL = 'user.User'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'

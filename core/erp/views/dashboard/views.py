@@ -1,3 +1,5 @@
+import datetime
+import locale
 from django.db.models import Sum, DecimalField, FloatField
 from django.db.models.functions import Cast
 from django.http import JsonResponse
@@ -11,10 +13,18 @@ from core.erp.models import Sale, Product, DetSale
 
 class DashboardView(TemplateView):
     template_name = 'dashboard.html'
+    # get_group_session
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
+
+    locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
+    year = datetime.now().year
+    month = datetime.now().strftime("%B")
+    def get(self, request, *args, **kwargs):
+        request.user.get_group_session()
+        return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         data = {}
@@ -74,5 +84,7 @@ class DashboardView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Dashboard'
         context['panel'] = 'Panel de administrador'
+        context['Year'] = self.year
+        context['month'] = self.month
         context['graph_sales_year'] = self.get_graph_sales_year()
         return context

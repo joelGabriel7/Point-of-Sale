@@ -1,3 +1,4 @@
+from crum import get_current_request
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.forms import model_to_dict
@@ -19,16 +20,16 @@ class User(AbstractUser):
             item['last_login'] = self.last_login.strftime('%Y-%m-%d')
         item['date_joined'] = self.date_joined.strftime('%Y-%m-%d')
         item['image'] = self.get_image()
-        item['groups'] = [{'id':g.id, 'name': g.name} for g in self.groups.all()]
+        item['groups'] = [{'id': g.id, 'name': g.name} for g in self.groups.all()]
         item['full_name'] = self.get_full_name()
         return item
 
-    # Esta forma resuelve un problema pero me impide crear un super usuario
-    # def save(self, *args, **kwargs):
-    #     if self.pk is None:
-    #         self.set_password(self.password)
-    #     else:
-    #         user = User.objects.get(pk=self.pk)
-    #         if user.password != user:
-    #             self.set_password(self.password)
-    #     super().save(*args, **kwargs)
+    def get_group_session(self):
+        try:
+            request = get_current_request()
+            groups = self.groups.all()
+            if groups.exists():
+                if 'group' not in request.session:
+                    request.session['group'] = groups[0]
+        except:
+            pass
