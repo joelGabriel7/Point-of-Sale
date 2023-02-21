@@ -24,7 +24,7 @@ from xhtml2pdf import pisa
 class SaleListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListView):
     model = Sale
     template_name = 'sale/list.html'
-    permission_required = 'erp.view_sale'
+    permission_required = 'view_sale'
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -62,7 +62,7 @@ class SaleCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Create
     form_class = SaleForm
     template_name = 'sale/create.html'
     success_url = reverse_lazy('erp:sale_list')
-    permission_required = 'erp.add_sale'
+    permission_required = 'add_sale'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
@@ -121,7 +121,7 @@ class SaleUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Update
     form_class = SaleForm
     template_name = 'sale/create.html'
     success_url = reverse_lazy('erp:sale_list')
-    permission_required = 'erp.change_sale'
+    permission_required = 'change_sale'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
@@ -190,7 +190,7 @@ class SaleDeleteView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Delete
     model = Sale
     template_name = 'sale/delete.html'
     success_url = reverse_lazy('erp:sale_list')
-    permission_required = 'erp.delete_sale'
+    permission_required = 'delete_sale'
     url_redirect = success_url
 
     def dispatch(self, request, *args, **kwargs):

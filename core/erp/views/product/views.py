@@ -14,7 +14,7 @@ from core.erp.models import Product
 class ProductListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListView):
     model = Product
     template_name = 'product/list.html'
-    permission_required = 'erp.view_product'
+    permission_required = 'view_product', 'add_product', 'change_product', 'delete_product'
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -48,7 +48,7 @@ class ProductCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Cre
     form_class = ProductForm
     template_name = 'product/create.html'
     success_url = reverse_lazy('erp:product_list')
-    permission_required = 'erp.add_product'
+    permission_required = 'add_product'
     url_redirect = success_url
 
     def dispatch(self, request, *args, **kwargs):
@@ -81,7 +81,7 @@ class ProductUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Upd
     form_class = ProductForm
     template_name = 'product/create.html'
     success_url = reverse_lazy('erp:product_list')
-    permission_required = 'erp.change_product'
+    permission_required = 'change_product'
     url_redirect = success_url
 
     def dispatch(self, request, *args, **kwargs):
@@ -114,7 +114,7 @@ class ProductDeleteView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Del
     model = Product
     template_name = 'product/delete.html'
     success_url = reverse_lazy('erp:product_list')
-    permission_required = 'erp.delete_product'
+    permission_required = 'delete_product'
     url_redirect = success_url
 
     @method_decorator(login_required)
