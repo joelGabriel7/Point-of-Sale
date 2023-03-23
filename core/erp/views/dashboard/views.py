@@ -1,5 +1,7 @@
 import datetime
 import locale
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum, DecimalField, FloatField
 from django.db.models.functions import Cast
 from django.http import JsonResponse
@@ -11,7 +13,7 @@ from datetime import *
 from core.erp.models import Sale, Product, DetSale
 
 
-class DashboardView(TemplateView):
+class DashboardView(LoginRequiredMixin,TemplateView):
     template_name = 'dashboard.html'
     # get_group_session
 
