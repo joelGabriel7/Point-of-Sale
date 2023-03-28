@@ -64,12 +64,12 @@
                         Sú último acceso fue {{ request.user.last_login }}
                     </span>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
+                    <a href="{% url 'user:profile' %}" class="dropdown-item">
                         <i class="fas fa-edit mr-2"></i> Editar perfil
-                        <span class="float-right text-muted text-sm">3 mins</span>
+                        <span class="float-right text-muted text-sm">{{ request.user.last_login }}</span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
+                    <a href="{% url 'user:change_password' %}" class="dropdown-item">
                         <i class="fas fa-lock mr-2"></i> Editar password
                         <span class="float-right text-muted text-sm">12 hours</span>
                     </a>
