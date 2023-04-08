@@ -12,12 +12,12 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
-
 from pathlib import Path
 
 from django.contrib import staticfiles
 
 from config import db as db
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -146,3 +146,13 @@ AUTH_USER_MODEL = 'user.User'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+# Email
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'german03prueba@gmail.com'
+# EMAIL_HOST_USER = 'joelgerman671@gmail.com'
+EMAIL_HOST_PASSWORD = 'xfikezkywmhttsum'
+# EMAIL_HOST_PASSWORD = 'zevjdhputnjzrosc' 'app_password de joelgerman671'
+EMAIL_USE_TLS = True

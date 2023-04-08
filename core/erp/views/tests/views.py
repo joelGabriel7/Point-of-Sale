@@ -9,7 +9,7 @@ from core.erp.models import Product, Category
 
 
 class TestView(TemplateView):
-    template_name = 'tests.html'
+    template_name = 'send_email.html'
 
     @method_decorator(csrf_exempt)
     @method_decorator(login_required)
